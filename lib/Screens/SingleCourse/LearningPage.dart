@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:resolvers/Constants/Fonts&Themes.dart';
+import 'package:resolvers/Services/PostServices.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:flutter_tts/flutter_tts.dart';
 class LearningPage extends StatefulWidget {
@@ -136,8 +137,10 @@ class _LearningPageState extends State<LearningPage> {
               bottom: height*0.01,
               left: 0.02*width,
               child: GestureDetector(
-onTap: (){
-  Navigator.pop(context);
+onTap: ()async{
+  await PostServices().submitLesson();
+  Navigator.of(context).pushNamedAndRemoveUntil(
+      '/HomePage', (Route<dynamic> route) => false);
 },
                 child: Container(
                   height: 0.08*height,

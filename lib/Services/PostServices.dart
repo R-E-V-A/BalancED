@@ -142,4 +142,14 @@ class PostServices {
     print(request.body);
     print(request.statusCode);
   }
+ submitLesson()async{
+   String token = await getToken(key: "token1");
+   var head = {
+     "Content-Type":"application/json",
+     "Authorization":"Bearer $token"
+   };
+   Uri uri = Uri.parse("https://api-balanced.azurewebsites.net/api/lesson/1");
+   var request = await http.put(uri,headers: head);
+   Fluttertoast.showToast(msg: request.body);
+ }
 }

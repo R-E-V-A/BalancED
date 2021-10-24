@@ -131,6 +131,26 @@ class GetServices {
      }
    return null;
  }
+ Future<dynamic> getUserGoals()async
+ {
+   String token = await getToken(key:"token1");
+   var headers = {
+     "Authorization":"Bearer $token"
+   };
+   Uri uri = Uri.parse("https://api-balanced.azurewebsites.net/api/goal");
+   var request = await http.get(uri,headers: headers);
+   if(request.statusCode==200)
+   {
+     print(request.body);
+     var jsonData = jsonDecode(request.body);
+     return UserProfile.fromJson(jsonData);
+   }
+   else
+   {
+     Fluttertoast.showToast(msg: "Sorry, User Profile is not available");
+   }
+   return null;
+ }
  Future<List<TransactionDetails>>getAllTransactionDetails()async
  {
    String token = await getToken(key:"token1");

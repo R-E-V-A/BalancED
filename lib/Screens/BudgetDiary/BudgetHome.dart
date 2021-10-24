@@ -61,14 +61,7 @@ class _BudgetHomeState extends State<BudgetHome> {
                               margin: const EdgeInsets.only(bottom: 6.0), //Same as `blurRadius` i guess
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0),
-                                gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xff68e89a),
-                                      Color(0xff39d074)
-                                    ],
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight
-                                ),
+                                color: Color(0xff22319e)
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
