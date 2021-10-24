@@ -29,11 +29,11 @@ class _OnboardingFourState extends State<OnboardingFour> {
               SizedBox(
                 height: 0.02*height,
               ),
-              Text("Start your journey with fun learning content",style: paraText.copyWith(fontWeight: FontWeight.w600,fontSize: 30,color: Color(0xff0d0f44)),textAlign: TextAlign.center,),
+              Text("Get your graduate with extraordinary skills",style: paraText.copyWith(fontWeight: FontWeight.w600,fontSize: 30,color: Color(0xff0d0f44)),textAlign: TextAlign.center,),
               SizedBox(
                 height: 0.02*height,
               ),
-              Text("explore various learning videos based on your passion",style: paraText.copyWith(fontWeight: FontWeight.w500,fontSize: 18,color: Color(0xff727587)),textAlign: TextAlign.center,),
+              Text("Got your certificate after finished your online class",style: paraText.copyWith(fontWeight: FontWeight.w500,fontSize: 18,color: Color(0xff727587)),textAlign: TextAlign.center,),
               SizedBox(
                 height: 0.02*height,
               ),

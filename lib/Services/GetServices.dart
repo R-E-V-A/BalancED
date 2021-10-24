@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:resolvers/Models/ExpenseBreakdownModel.dart';
 import 'package:resolvers/Models/MonthlyExpenseModel.dart';
 import 'package:resolvers/Models/NetWorthModel.dart';
+import 'package:resolvers/Models/NewsModel.dart';
 import 'package:resolvers/Models/UserProfileModel.dart';
 import 'package:resolvers/Services/SharedPreferences.dart';
 
@@ -136,7 +137,7 @@ class GetServices {
    var headers = {
      "Authorization":"Bearer $token"
    };
-   Uri uri = Uri.parse("https://shelldbapi.azurewebsites.net/api/transaction");
+   Uri uri = Uri.parse("https://api-balanced.azurewebsites.net/api/transaction");
    var request = await http.get(uri,headers: headers);
    var jsonData;
    if(request.statusCode==200)
@@ -238,6 +239,24 @@ class GetServices {
    }
    return (jsonData as List)
        .map((jsonData) => NetWorth.fromJson(jsonData))
+       .toList();
+ }
+ Future<List<NewsClass>>getNews()async
+ {
+   Uri uri = Uri.parse("https://api-balanced.azurewebsites.net/api/news");
+   var request = await http.get(uri);
+   var jsonData;
+   if(request.statusCode==200)
+   {
+     jsonData = jsonDecode(request.body);
+   }
+   else
+   {
+     Fluttertoast.showToast(msg: "Sorry, An Error occured while fetching data");
+     return null;
+   }
+   return (jsonData as List)
+       .map((jsonData) => NewsClass.fromJson(jsonData))
        .toList();
  }
 }

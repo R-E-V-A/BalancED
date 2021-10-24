@@ -6,6 +6,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:resolvers/Constants/Fonts&Themes.dart';
 import 'package:resolvers/Screens/AuthScreens/Components/SignUpTextFIeldMobile.dart';
 import 'package:resolvers/Services/PostServices.dart';
+import 'package:resolvers/Services/TwilioServices.dart';
+import 'package:twilio_flutter/twilio_flutter.dart';
 
 import '../../Routes.dart';
 
@@ -24,6 +26,7 @@ class _AddRecordState extends State<AddRecord> {
   PostServices postServices = PostServices();
   bool isincome=false,isexpense=false,isadding=false;
   int val=1,val2=1;
+  TwilioService twilioService = TwilioService();
   void toggleBoolean(int curr)
   {
     if(curr==1)
@@ -197,7 +200,9 @@ class _AddRecordState extends State<AddRecord> {
                         Fluttertoast.showToast(msg: "Hang On");
                         int amt = int.parse(amount.text);
                        await postServices.addTransaction(date.text, amt, category.text, " ", "Income");
-                        Navigator.pushNamed(context, Routes.HomePage);
+                       await twilioService.setAccount();
+                       await twilioService.sendWhatsApp();
+                        Navigator.pushNamed(context, Routes.budgetHomePage);
                       },
                       child:Container(
                         height: 0.07*height,
@@ -338,7 +343,7 @@ class _AddRecordState extends State<AddRecord> {
                        Fluttertoast.showToast(msg: "Hang On");
                        int amt = int.parse(amount.text);
                        await postServices.addTransaction(date.text, amt, category.text, " ", "Expense");
-                       Navigator.pushNamed(context, Routes.HomePage);
+                       Navigator.pushNamed(context, Routes.budgetHomePage);
                      },
                      child:Container(
                        height: 0.07*height,

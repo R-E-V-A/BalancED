@@ -89,7 +89,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         x =  await postServices.createNewUser(username.text, email.text, password.text, "01/01/2000");
                       }
                   if(x!=null) {
-                    Navigator.pushNamed(context, Routes.aboutPage);
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil('/HomePage', (Route<dynamic> route) => false);
                   }
                   },
                   child: Container(

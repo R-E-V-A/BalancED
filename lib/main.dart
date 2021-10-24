@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:resolvers/Screens/AuthScreens/AboutPage.dart';
 import 'package:resolvers/Screens/AuthScreens/LogInScreen.dart';
+import 'package:resolvers/Screens/BudgetDiary/BudgetHome.dart';
 import 'package:resolvers/Screens/HomeScreen.dart';
 import 'package:resolvers/Screens/MyProfile/MyProfileScreen.dart';
 import 'package:resolvers/Screens/Onboarding/Onboarding2.dart';
@@ -39,9 +40,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: token=="empty"?OnboardingTwo():HomePage(),/*SignUpPage(title: 'Flutter Demo Home Page'),*/
+      home: token=="empty"?SignUpPage():HomePage(),/*SignUpPage(title: 'Flutter Demo Home Page'),*/
       routes: routes,
-      initialRoute: token=="empty"?"/OnboardingOne":"/HomePage",
+      initialRoute: token=="empty"?"/SignUpPage":"/HomePage",
     );
   }
 }
@@ -57,4 +58,5 @@ var routes = <String,WidgetBuilder>{
   Routes.OnboardingPage4: (BuildContext context)=>OnboardingFour(),
   Routes.aboutPage: (BuildContext context)=>AboutPage(),
   Routes.budgetScorePage:(BuildContext context)=>BudgetScore(),
+  Routes.budgetHomePage:(BuildContext context)=>BudgetHome(),
 };

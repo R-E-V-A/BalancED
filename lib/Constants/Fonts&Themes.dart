@@ -6,6 +6,7 @@ TextStyle financeurText = GoogleFonts.mulish(color: Colors.black);
 List<String>articleType = ["Basic", "Crypto"];
 List<bool>typeSelected = [false,false];
 List<String> searchString=[];
+String demoText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ipsum phasellus diam eu mi, elementum. Pellentesque dapibus nisi auctor vitae ut congue facilisis metus. Praesent libero facilisi eleifend justo, tortor suscipit. Fringilla pharetra nibh tortor nunc nisl dictum suscipit convallis donec. Penatibus ut lacus nullam orci ut sit.";
 int currIndex=0;
 TextStyle paraText = GoogleFonts.poppins(color: Colors.white);
 String profileUsername;
