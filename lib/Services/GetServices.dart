@@ -117,7 +117,7 @@ class GetServices {
    var headers = {
      "Authorization":"Bearer $token"
    };
-   Uri uri = Uri.parse("https://shelldbapi.azurewebsites.net/api/userdetails");
+   Uri uri = Uri.parse("https://api-balanced.azurewebsites.net/api/userdetails");
    var request = await http.get(uri,headers: headers);
    if(request.statusCode==200)
    {

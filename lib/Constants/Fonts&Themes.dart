@@ -15,6 +15,7 @@ int changePage(int val)
 {
   return val;
 }
+List<String>goalList = ["Track Budget","Add Expenses for 5 Days","Finish 3 Lessons","Finish 5 Goals in a Week","Carry on for a Month"];
 String profileEmail;
 List<String>courseTitle = ["Budgeting 101","Side Hustle","Investment","Credit Card Management","Retirement 101"];
 List<String>courseDesc = ["Learn to budget your expenses.","Bring your skills together & start your successful side hustle.","Bring your inner invester to life and learn to invest smart.","Bring your inner invester to life and learn to invest smart.","Bring your inner invester to life and learn to invest smart."];

@@ -99,8 +99,8 @@ class _HomePageState extends State<HomePage> {
                                           border: Border.all(color: Color(0xff22319e),width: 0.004*width),
                                           borderRadius: BorderRadius.circular(20),
                                         image: DecorationImage(
-                                          fit: BoxFit.scaleDown,
-                                          image: AssetImage("assets/profilepic.png"),
+                                          fit: BoxFit.contain,
+                                          image: AssetImage("assets/cnn.png",),
                                         )
                                       ),
                                     ),

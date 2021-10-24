@@ -201,7 +201,6 @@ class _AddRecordState extends State<AddRecord> {
                         int amt = int.parse(amount.text);
                        await postServices.addTransaction(date.text, amt, category.text, " ", "Income");
                        await twilioService.setAccount();
-                       await twilioService.sendWhatsApp();
                         Navigator.pushNamed(context, Routes.budgetHomePage);
                       },
                       child:Container(
@@ -343,6 +342,7 @@ class _AddRecordState extends State<AddRecord> {
                        Fluttertoast.showToast(msg: "Hang On");
                        int amt = int.parse(amount.text);
                        await postServices.addTransaction(date.text, amt, category.text, " ", "Expense");
+                       await twilioService.sendSms();
                        Navigator.pushNamed(context, Routes.budgetHomePage);
                      },
                      child:Container(

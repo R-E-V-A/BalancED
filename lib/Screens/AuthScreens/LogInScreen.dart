@@ -35,29 +35,18 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 60.0),
-                  child: Row(
-                    children: [
-                      Image.asset("assets/budgetsignup.png",width: 0.3*width,),
-                      SizedBox(
-                        width: 0.02*width,
-                      ),
-                      Stack(
-                        children: [
-                          Image.asset("assets/signupbackground.png",width: 0.12*width,),
-                          Positioned(
-                              left: 7,
-                              top: 3,
-                              child: Image.asset("assets/aisignup.png",width: 0.07*width,height: 0.05*height,)),
-                        ],
-                      )
-                    ],
+                  padding: const EdgeInsets.only(left: 80.0),
+                  child: Image(
+                    height: 130,
+                    image: AssetImage(
+                        "assets/callogo.png"
+                    ),
                   ),
                 ),
                 SizedBox(
                   height: 0.03*height,
                 ),
-                Text("Nice to see you back here 😉",style: paraText.copyWith(fontWeight: FontWeight.w600,fontSize: 30,color: Color(0xff49494f)),textAlign: TextAlign.center,),
+                Text("      Welcome Back",style: paraText.copyWith(fontWeight: FontWeight.w600,fontSize: 28,color: Color(0xff49494f)),textAlign: TextAlign.center,),
                 SizedBox(
                   height: 0.1*height,
                 ),
@@ -86,14 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                     margin: const EdgeInsets.only(bottom: 6.0), //Same as `blurRadius` i guess
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
-                      gradient: LinearGradient(
-                          colors: [
-                            Color(0xff68e89a),
-                            Color(0xff39d074)
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight
-                      ),
+                      color: Color(0xff22319e)
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -101,10 +83,6 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("Log In",style: paraText.copyWith(fontSize: 20,fontWeight: FontWeight.w500),),
-                          SizedBox(
-                            width: 0.02*width,
-                          ),
-                          Icon(Icons.arrow_right_alt,color: Colors.white,size: 30,)
                         ],
                       )),
                     ),
@@ -121,25 +99,14 @@ class _LoginPageState extends State<LoginPage> {
                     margin: const EdgeInsets.only(bottom: 6.0), //Same as `blurRadius` i guess
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
-                      gradient: LinearGradient(
-                          colors: [
-                            Color(0xff6f6f72),
-                            Color(0xff49494f)
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight
-                      ),
+                      color: Color(0xff121032)
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Center(child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("New in town? Sign up",style: paraText.copyWith(fontSize: 20,fontWeight: FontWeight.w500),),
-                          SizedBox(
-                            width: 0.02*width,
-                          ),
-                          Icon(Icons.arrow_right_alt,color: Colors.white,size: 30,)
+                          Text("Create a New Account",style: paraText.copyWith(fontSize: 20,fontWeight: FontWeight.w500),),
                         ],
                       )),
                     ),

@@ -1,10 +1,14 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:resolvers/Constants/Fonts&Themes.dart';
 import 'package:resolvers/Models/UserProfileModel.dart';
 import 'package:resolvers/Screens/AuthScreens/Components/SignUpTextField.dart';
+import 'package:resolvers/Screens/MyProfile/SoloGoals.dart';
 import 'package:resolvers/Services/GetServices.dart';
 import 'package:resolvers/Services/PostServices.dart';
 import 'package:resolvers/Services/SharedPreferences.dart';
@@ -21,6 +25,7 @@ class MyProfile extends StatefulWidget {
 
 class _MyProfileState extends State<MyProfile> {
   String token;
+  int touchedIndex=-1;
   PageController pageController = PageController(
 //    initialPage: 0,
     keepPage: true,
@@ -55,74 +60,202 @@ class _MyProfileState extends State<MyProfile> {
                 children: [
                   Text("Profile", style: paraText.copyWith(
                       fontWeight: FontWeight.w600,
-                      fontSize: 28,
-                      color: Colors.black),),
-                  SizedBox(height: 0.03 * height,),
+                      fontSize: 34,
+                      color: Color(0xff1c2031)),),
+                  Divider(
+                    endIndent: 300,
+                    thickness: 4,
+                    color: Color(0xff22319e),
+                  ),
+                  SizedBox(height: 0.001 * height,),
                   FutureBuilder<UserProfile>(
                     future: GetServices().getUserProfile(),
                     builder: (context, snapshot) {
                       if(snapshot.hasData)
                         {
-                          return Column(
+                          return ListView(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
                             children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 100,
-                                    height: 100,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      image: DecorationImage(image:AssetImage("assets/profilepic.png"),
-                                        fit: BoxFit.fill
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: 0.06*width,),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                      children:[
-                                        Text(snapshot.data.username,style: paraText.copyWith(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 32),),
-                                        Text(snapshot.data.email,style: paraText.copyWith(fontWeight: FontWeight.w500,color: Colors.grey,fontSize: 20)),
-                                        SizedBox(height:0.01*height),
-                                        GestureDetector(
-                                          onTap: ()async{
-                                          },
-                                          child:Container(
-                                            height: 0.04*height,
-                                            width: width*0.3,
-                                            margin: const EdgeInsets.only(bottom: 6.0), //Same as `blurRadius` i guess
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(10.0),
-                                              gradient: LinearGradient(
-                                                  colors: [
-                                                    Color(0xff68e89a),
-                                                    Color(0xff39d074)
-                                                  ],
-                                                  begin: Alignment.topLeft,
-                                                  end: Alignment.bottomRight
-                                              ),
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Center(child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(Icons.edit,color: Colors.white,size: 20,),
-                                                  SizedBox(
-                                                    width: 0.02*width,
-                                                  ),
-                                                  Text("Edit Profile",style: paraText.copyWith(fontSize: 12,fontWeight: FontWeight.w600),),
-                                                ],
-                                              )),
-                                            ),
+                              CircleAvatar(
+                                radius: 90,
+                                backgroundImage:AssetImage(
+                                  "assets/profilepic.png",),
+                              ),
+                              Center(child: Text(snapshot.data.username,style: paraText.copyWith(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 35),)),
+                              Center(child: Text(snapshot.data.email,style: paraText.copyWith(fontWeight: FontWeight.w500,color: Color(0xff979797),fontSize: 18))),
+                              SizedBox(height: 0.03*height,),
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)
+                                ),
+                                elevation: 20,
+                                child: Container(
+                                  width: 0.8*width,
+                                  height: 0.13*height,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            children: [
+                                              Text("Total Lessons Completed",style: paraText.copyWith(color: Colors.black,fontWeight: FontWeight.w700,fontSize: 11),),
+                                              Text("10",style: paraText.copyWith(color: Color(0xff22319e),fontWeight: FontWeight.w700,fontSize: 18)),
+                                            ],
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                           ),
                                         ),
-                                      ]
-                                  )
-                                ],
+                                        Expanded(
+                                          child: Column(
+                                            children: [
+                                              Text("Total Amount Saved",style: paraText.copyWith(color: Colors.black,fontWeight: FontWeight.w700,fontSize: 11)),
+                                              Text("${200}",style: paraText.copyWith(color: Color(0xff22319e),fontWeight: FontWeight.w700,fontSize: 18)),
+                                            ],
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Column(
+                                            children: [
+                                              Text("Total Goals Completed",style: paraText.copyWith(color: Colors.black,fontWeight: FontWeight.w700,fontSize: 11)),
+                                              Text("26",style: paraText.copyWith(color: Color(0xff22319e),fontWeight: FontWeight.w700,fontSize: 18)),
+                                            ],
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ),
-                              SizedBox(height: 0.5*height,),
                               GestureDetector(
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15)
+                                  ),
+                                  elevation: 10,
+                                  child: Container(
+                                    width: 0.8*width,
+                                    height: 0.3*height,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children:[
+                                              Text("Goals",style: paraText.copyWith(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 25)),
+                                              Icon(Icons.arrow_forward)
+                                              ],
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: SizedBox(
+                                                  height: 20,
+                                                  width: 20,
+                                                  child: PieChart(
+                                                      PieChartData(
+                                                          pieTouchData:
+                                                          PieTouchData(touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                                                            setState(() {
+                                                              if (!event.isInterestedForInteractions ||
+                                                                  pieTouchResponse == null ||
+                                                                  pieTouchResponse.touchedSection == null) {
+                                                                touchedIndex = -1;
+                                                                return;
+                                                              }
+                                                              touchedIndex = pieTouchResponse.touchedSection.touchedSectionIndex;
+                                                            });
+                                                          }),
+                                                          borderData: FlBorderData(
+                                                            show: false,
+                                                          ),
+                                                          sectionsSpace: 0,
+                                                          centerSpaceRadius: 20,
+                                                          sections: showingSections()
+                                                      )
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Column(
+                                                  children: [
+                                                    Column(
+                                                      children: [
+                                                        Text("Daily",style: paraText.copyWith(fontSize: 12,color: Colors.black,fontWeight: FontWeight.w600),),
+                                                        Container(
+                                                          width: 120,
+                                                          height: 25,
+                                                          child: FAProgressBar(
+                                                            borderRadius: BorderRadius.circular(5),
+                                                            currentValue: 70,
+                                                            displayText: "%",
+                                                            displayTextStyle: paraText.copyWith(fontSize: 12,color: Colors.white),
+                                                            backgroundColor: Color(0xfff1f1f1),
+                                                            progressColor: Color(0xff0d34ff),
+                                                          ),
+                                                        )
+                                                      ],
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                    ),
+                                                    SizedBox(height: 0.02*height,),
+                                                    Column(
+                                                      children: [
+                                                        Text("Weekly",style: paraText.copyWith(fontSize: 12,color: Colors.black,fontWeight: FontWeight.w600),),
+                                                        Container(
+                                                          width: 120,
+                                                          height: 25,
+                                                          child: FAProgressBar(
+                                                            borderRadius: BorderRadius.circular(5),
+                                                            currentValue: 50,
+                                                            displayText: "%",
+                                                            displayTextStyle: paraText.copyWith(fontSize: 12,color: Colors.white),
+                                                            backgroundColor: Color(0xfff1f1f1),
+                                                            progressColor: Color(0xff0d34ff),
+                                                          ),
+                                                        )
+                                                      ],
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                    ),
+                                                    SizedBox(height: 0.02*height,),
+                                                    Column(
+                                                      children: [
+                                                        Text("Monthly",style: paraText.copyWith(fontSize: 12,color: Colors.black,fontWeight: FontWeight.w600),),
+                                                        Container(
+                                                          width: 120,
+                                                          height: 25,
+                                                          child: FAProgressBar(
+                                                            borderRadius: BorderRadius.circular(5),
+                                                            currentValue: 90,
+                                                            displayText: "%",
+                                                            displayTextStyle: paraText.copyWith(fontSize: 12,color: Colors.white),
+                                                            backgroundColor: Color(0xfff1f1f1),
+                                                            progressColor: Color(0xff0d34ff),
+                                                          ),
+                                                        )
+                                                      ],
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                    ),
+                                  ),
+                                ),
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>SoloGoalpage(
+
+                                  )));
+                                },
+                              ),
+                              /*GestureDetector(
                                 onTap: ()async{
                                   await deleteLocalKey("token1");
                                   Navigator.of(context)
@@ -157,7 +290,7 @@ class _MyProfileState extends State<MyProfile> {
                                     )),
                                   ),
                                 ),
-                              ),
+                              ),*/
                             ],
                           );
                         }
@@ -170,66 +303,75 @@ class _MyProfileState extends State<MyProfile> {
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          iconSize: 30,
+          iconSize: 40,
           unselectedItemColor: Colors.grey,
-          selectedItemColor: Color(0xff7165e3),
+          selectedItemColor: Colors.black,
           backgroundColor: Colors.white,
           currentIndex: currIndex,
           elevation: 20,
           onTap: (val) {
             setState(() {
-              if(val!=currIndex)
-              {
-                currIndex=val;
-                if(val==0)
-                {
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/HomePage', (Route<dynamic> route) => false);
-                }
-                else if(val==1)
-                {
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/analyticsPage', (Route<dynamic> route) => false);
-                }
-                else if(val==2)
-                {
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/BudgetScorePage', (Route<dynamic> route) => false);
-                }
-                else if(val==4)
-                {
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/MyProfilePage', (Route<dynamic> route) => false);
+              if (val != currIndex) {
+                currIndex = val;
+                if (val == 0) {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/HomePage', (Route<dynamic> route) => false);
+                } else if (val == 1) {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/BudgetHomePage', (Route<dynamic> route) => false);
+                } else if (val == 2) {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/MyProfilePage', (Route<dynamic> route) => false);
                 }
               }
             });
           },
+          selectedIconTheme: IconThemeData(color: Colors.black),
           items: [
             BottomNavigationBarItem(
-                label: " ",
+              label: "Home",
+              icon: Icon(Icons.home),
+            ),
+            BottomNavigationBarItem(
+                label: "Budget",
                 icon: Icon(Icons.account_balance_wallet_outlined)),
-            BottomNavigationBarItem(
-                label: " ",
-                icon: Icon(Icons.bar_chart)),
-            BottomNavigationBarItem(
-                label: " ",
-                icon: Stack(
-                  children: [
-                    Image.asset("assets/purplenavy.png", height: 50,),
-                    Positioned(
-                        top: 13,
-                        left: 13,
-                        child: Image.asset("assets/wand.png", height: 25,))
-                  ],
-                )),
-            BottomNavigationBarItem(
-                label: " ",
-                icon: Icon(Icons.sticky_note_2_rounded)),
-            BottomNavigationBarItem(
-                label: " ",
-                icon: Icon(Icons.person)),
+            BottomNavigationBarItem(label: "Profile", icon: Icon(Icons.person)),
           ],
         )
     );
+  }
+  List<PieChartSectionData> showingSections() {
+    return List.generate(2, (i) {
+      final isTouched = i == touchedIndex;
+      final fontSize = isTouched ? 25.0 : 16.0;
+      final radius = isTouched ? 60.0 : 50.0;
+      switch (i) {
+        case 0:
+          return PieChartSectionData(
+            color: const Color(0xff0d34ff),
+            value: 60,
+            title: '',
+            radius: radius,
+            titleStyle: TextStyle(
+                fontSize: fontSize,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xffffffff)),
+          );
+        case 1:
+          return PieChartSectionData(
+            color: Color(0xffeeeeee),
+            value: 40,
+            title: '',
+            radius: radius,
+            titleStyle: TextStyle(
+                fontSize: fontSize,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xffffffff)),
+          );
+
+        default:
+          throw Error();
+      }
+    });
   }
 }
