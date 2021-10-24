@@ -42,8 +42,8 @@ class _LearningPageState extends State<LearningPage> {
   }
 
   void speak() async {
-    if (courseDesc[0].isNotEmpty) {
-      await _flutterTts.speak(demoText);
+    if (contentDummy.isNotEmpty) {
+      await _flutterTts.speak(contentDummy.substring(0,1000));
     }
   }
 
@@ -120,7 +120,7 @@ class _LearningPageState extends State<LearningPage> {
                   SizedBox(
                     height: 0.01*height,
                   ),
-                  Text(demoText,style: paraText.copyWith(color: Color(0xff9c9c9c),fontSize: 15)),
+                  Text(contentDummy,style: paraText.copyWith(color: Color(0xff9c9c9c),fontSize: 15)),
                   SizedBox(
                     height: 0.02*height,
                   ),
@@ -128,7 +128,7 @@ class _LearningPageState extends State<LearningPage> {
                   SizedBox(
                     height: 0.01*height,
                   ),
-                  Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ipsum phasellus diam eu mi, elementum. Pellentesque dapibus nisi auctor vitae ut congue facilisis metus. Praesent libero facilisi eleifend justo, tortor suscipit. Fringilla pharetra nibh tortor nunc nisl dictum suscipit convallis donec. Penatibus ut lacus nullam orci ut sit.",style: paraText.copyWith(color: Color(0xff9c9c9c),fontSize: 15)),
+                  Text(demoText,style: paraText.copyWith(color: Color(0xff9c9c9c),fontSize: 15)),
                 ],
               ),
             ),

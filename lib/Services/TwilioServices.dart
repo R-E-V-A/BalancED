@@ -1,10 +1,11 @@
+import 'package:resolvers/Constants/Tokens.dart';
 import 'package:twilio_flutter/twilio_flutter.dart';
 
 class TwilioService
 {
   TwilioFlutter twilioFlutter;
   void setAccount(){
-    twilioFlutter = TwilioFlutter(accountSid: "ACeec0281d6cb2373ccff9c36c7a7ae706", authToken: "4ad3d69be49dd065cf8d325a027e665b", twilioNumber: "3344633032");
+    twilioFlutter = TwilioFlutter(accountSid: "ACeec0281d6cb2373ccff9c36c7a7ae706", authToken: twilioToken, twilioNumber: "3344633032");
   }
   void verifyPhoneNumber(){
 
