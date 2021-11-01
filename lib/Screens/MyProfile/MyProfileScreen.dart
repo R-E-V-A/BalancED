@@ -8,6 +8,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:resolvers/Constants/Fonts&Themes.dart';
 import 'package:resolvers/Models/UserProfileModel.dart';
 import 'package:resolvers/Screens/AuthScreens/Components/SignUpTextField.dart';
+import 'package:resolvers/Screens/MyProfile/Bookmarks.dart';
+import 'package:resolvers/Screens/MyProfile/EditProfilePage.dart';
 import 'package:resolvers/Screens/MyProfile/SoloGoals.dart';
 import 'package:resolvers/Services/GetServices.dart';
 import 'package:resolvers/Services/PostServices.dart';
@@ -48,20 +50,30 @@ class _MyProfileState extends State<MyProfile> {
         .width;
     return Scaffold(
         extendBody: true,
+        backgroundColor: Colors.white,
         body: Padding(
           padding: EdgeInsets.only(
               left: 0.06* width, right: 0.04 * width, top: 0.06 * height),
           child: Container(
+            color: Colors.white,
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               physics: ScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Profile", style: paraText.copyWith(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 34,
-                      color: Color(0xff1c2031)),),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Profile", style: paraText.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 34,
+                          color: Color(0xff1c2031)),),
+                      IconButton(onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfilePage()));
+                      }, icon: Icon(Icons.settings,size: 40,color: Color(0xff200e32),))
+                    ],
+                  ),
                   Divider(
                     endIndent: 300,
                     thickness: 4,
@@ -86,7 +98,9 @@ class _MyProfileState extends State<MyProfile> {
                               Center(child: Text(snapshot.data.username,style: paraText.copyWith(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 35),)),
                               Center(child: Text(snapshot.data.email,style: paraText.copyWith(fontWeight: FontWeight.w500,color: Color(0xff979797),fontSize: 18))),
                               SizedBox(height: 0.03*height,),
-                              Card(
+                              Card
+                                (
+                                shadowColor:Colors.white,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15)
                                 ),
@@ -130,8 +144,48 @@ class _MyProfileState extends State<MyProfile> {
                                   ),
                                 ),
                               ),
+                              Card(
+                              shadowColor:Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)
+                                ),
+
+                                color: Color(0xff22319e),
+                                elevation: 20,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          children: [
+                                            Text("Bookmarks",style: paraText.copyWith(color: Colors.white,fontWeight: FontWeight.w700,fontSize: 25),),
+                                            SizedBox(height: 0.01*height,),
+                                            Text("Take some time to read your saved Shots",style: paraText.copyWith(color: Colors.white,fontWeight: FontWeight.w700,fontSize: 12),textAlign: TextAlign.start,),
+                                          ],
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        child: Container(
+                                          width:40,
+                                          height:30,
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10),
+                                              color: Colors.white),
+                                          child: Icon(Icons.arrow_forward),
+                                        ),
+                                        onTap: (){
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>BookmarksScreen()));
+                                        },
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
                               GestureDetector(
                                 child: Card(
+                                  shadowColor:Colors.white,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(15)
                                   ),
@@ -195,7 +249,7 @@ class _MyProfileState extends State<MyProfile> {
                                                             displayText: "%",
                                                             displayTextStyle: paraText.copyWith(fontSize: 12,color: Colors.white),
                                                             backgroundColor: Color(0xfff1f1f1),
-                                                            progressColor: Color(0xff0d34ff),
+                                                            progressColor: Colors.green,
                                                           ),
                                                         )
                                                       ],
@@ -233,7 +287,7 @@ class _MyProfileState extends State<MyProfile> {
                                                             displayText: "%",
                                                             displayTextStyle: paraText.copyWith(fontSize: 12,color: Colors.white),
                                                             backgroundColor: Color(0xfff1f1f1),
-                                                            progressColor: Color(0xff0d34ff),
+                                                            progressColor: Colors.orange,
                                                           ),
                                                         )
                                                       ],
@@ -254,6 +308,39 @@ class _MyProfileState extends State<MyProfile> {
 
                                   )));
                                 },
+
+                              ),
+                              SizedBox(
+                                height: 0.03*height,
+                              ),
+                              GestureDetector(
+                                onTap: ()async{
+                                  await deleteLocalKey("token1");
+                                  Navigator.of(context)
+                                      .pushNamedAndRemoveUntil('/LogInPage', (Route<dynamic> route) => false);
+                                },
+                                child: Container(
+                                  height: 0.07*height,
+                                  width: width*0.8,
+                                  margin: const EdgeInsets.only(bottom: 6.0), //Same as `blurRadius` i guess
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      color: Color(0xff200e32)
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Center(child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text("Log Out",style: paraText.copyWith(fontSize: 20,fontWeight: FontWeight.w500),),
+                                        SizedBox(
+                                          width: 0.02*width,
+                                        ),
+                                        Icon(Icons.arrow_right_alt,color: Colors.white,size: 30,)
+                                      ],
+                                    )),
+                                  ),
+                                ),
                               ),
                               /*GestureDetector(
                                 onTap: ()async{
@@ -316,10 +403,10 @@ class _MyProfileState extends State<MyProfile> {
                 if (val == 0) {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       '/HomePage', (Route<dynamic> route) => false);
-                } else if (val == 1) {
+                } /*else if (val == 1) {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       '/BudgetHomePage', (Route<dynamic> route) => false);
-                } else if (val == 2) {
+                } */else if (val == 1) {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       '/MyProfilePage', (Route<dynamic> route) => false);
                 }
@@ -332,9 +419,9 @@ class _MyProfileState extends State<MyProfile> {
               label: "Home",
               icon: Icon(Icons.home),
             ),
-            BottomNavigationBarItem(
+            /*   BottomNavigationBarItem(
                 label: "Budget",
-                icon: Icon(Icons.account_balance_wallet_outlined)),
+                icon: Icon(Icons.account_balance_wallet_outlined)),*/
             BottomNavigationBarItem(label: "Profile", icon: Icon(Icons.person)),
           ],
         )

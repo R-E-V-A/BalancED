@@ -117,7 +117,7 @@ class GetServices {
    var headers = {
      "Authorization":"Bearer $token"
    };
-   Uri uri = Uri.parse("https://api-balanced.azurewebsites.net/api/userdetails");
+   Uri uri = Uri.parse("https://api-balanced-epic.azurewebsites.net/api/userdetails");
    var request = await http.get(uri,headers: headers);
    if(request.statusCode==200)
    {
@@ -137,7 +137,7 @@ class GetServices {
    var headers = {
      "Authorization":"Bearer $token"
    };
-   Uri uri = Uri.parse("https://api-balanced.azurewebsites.net/api/goal");
+   Uri uri = Uri.parse("https://api-balanced-epic.azurewebsites.net/api/goal");
    var request = await http.get(uri,headers: headers);
    if(request.statusCode==200)
    {
@@ -157,7 +157,7 @@ class GetServices {
    var headers = {
      "Authorization":"Bearer $token"
    };
-   Uri uri = Uri.parse("https://api-balanced.azurewebsites.net/api/transaction");
+   Uri uri = Uri.parse("https://api-balanced-epic.azurewebsites.net/api/transaction");
    var request = await http.get(uri,headers: headers);
    var jsonData;
    if(request.statusCode==200)
@@ -179,7 +179,7 @@ class GetServices {
    var headers = {
      "Authorization":"Bearer $token"
    };
-   Uri uri = Uri.parse("https://shelldbapi.azurewebsites.net/api/forecast");
+   Uri uri = Uri.parse("https://api-balanced-epic.azurewebsites.net/api/forecast");
    var request = await http.get(uri,headers: headers);
    var jsonData;
    if(request.statusCode==200)
@@ -201,7 +201,7 @@ class GetServices {
    var headers = {
      "Authorization":"Bearer $token"
    };
-   Uri uri = Uri.parse("https://shelldbapi.azurewebsites.net/api/analytics/monthly_break");
+   Uri uri = Uri.parse("https://api-balanced-epic.azurewebsites.net/api/analytics/monthly_break");
    var request = await http.get(uri,headers: headers);
    var jsonData;
    if(request.statusCode==200)
@@ -223,7 +223,7 @@ class GetServices {
    var headers = {
      "Authorization":"Bearer $token"
    };
-   Uri uri = Uri.parse("https://shelldbapi.azurewebsites.net/api/analytics/expense_break");
+   Uri uri = Uri.parse("https://api-balanced-epic.azurewebsites.net/api/analytics/expense_break");
    var request = await http.get(uri,headers: headers);
    var jsonData;
    if(request.statusCode==200)
@@ -245,7 +245,7 @@ class GetServices {
    var headers = {
      "Authorization":"Bearer $token"
    };
-   Uri uri = Uri.parse("https://shelldbapi.azurewebsites.net/api/analytics/net_worth");
+   Uri uri = Uri.parse("https://api-balanced-epic.azurewebsites.net/api/analytics/net_worth");
    var request = await http.get(uri,headers: headers);
    var jsonData;
    if(request.statusCode==200)
@@ -263,7 +263,7 @@ class GetServices {
  }
  Future<List<NewsClass>>getNews()async
  {
-   Uri uri = Uri.parse("https://api-balanced.azurewebsites.net/api/news");
+   Uri uri = Uri.parse("https://api-balanced-epic.azurewebsites.net/api/news");
    var request = await http.get(uri);
    var jsonData;
    if(request.statusCode==200)

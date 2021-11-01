@@ -11,10 +11,15 @@ int currIndex=0;
 TextStyle paraText = GoogleFonts.poppins(color: Colors.white);
 String profileUsername;
 String profilepic;
+int fsize=12;
+bool isVisible=false;
 int changePage(int val)
 {
   return val;
 }
+TextStyle reva = GoogleFonts.poppins(
+  color: Colors.white
+);
 List<String>goalList = ["Track Budget","Add Expenses for 5 Days","Finish 3 Lessons","Finish 5 Goals in a Week","Carry on for a Month"];
 String profileEmail;
 List<String>courseTitle = ["Budgeting 101","Side Hustle","Investment","Credit Card Management","Retirement 101"];

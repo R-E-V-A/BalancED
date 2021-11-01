@@ -7,7 +7,7 @@ import 'package:resolvers/Services/SharedPreferences.dart';
 class PostServices {
  Future<NewUser> createNewUser(String username, String email, String password, String dob) async
   {
-    Uri uri = Uri.parse("https://api-balanced.azurewebsites.net/api/auth/signup");
+    Uri uri = Uri.parse("https://api-balanced-epic.azurewebsites.net/api/auth/signup");
     var head = {
       "Content-Type":"application/json"
     };
@@ -40,7 +40,7 @@ class PostServices {
   }
  Future<ExistingUser> LogInUser(String username,String password)async
   {
-    Uri uri = Uri.parse("https://api-balanced.azurewebsites.net/api/auth/login");
+    Uri uri = Uri.parse("https://api-balanced-epic.azurewebsites.net/api/auth/login");
     var user = {
       "username": username,
       "password": password
@@ -67,7 +67,7 @@ class PostServices {
     else {
       print(response.statusCode);
       print(response.body);
-      Fluttertoast.showToast(msg: "Sorry Wrong Credentials");
+      Fluttertoast.showToast(msg: response.body);
       return null;
     }
   }
@@ -78,7 +78,7 @@ class PostServices {
     var headers = {
       "Authorization":"Token $token",
     };
-    Uri uri = Uri.parse("https://api-balanced.azurewebsites.net/api/logout/");
+    Uri uri = Uri.parse("https://api-balanced-epic.azurewebsites.net/api/logout/");
     var response =await http.post(uri,headers: headers);
     print("LOGGED OUT SUCCESS");
     print(response.statusCode);
@@ -87,7 +87,7 @@ class PostServices {
  Future<bool> addTransaction(String date, int amount, String category, String description, String type)
   async {
     String token = await getToken(key:"token1");
-    Uri uri = Uri.parse("https://api-balanced.azurewebsites.net/api/transaction");
+    Uri uri = Uri.parse("https://api-balanced-epic.azurewebsites.net/api/transaction");
     var user = {
       "Tdate":date,
       "amount":amount,
@@ -121,26 +121,12 @@ class PostServices {
     var headers = {
       "Authorization":"Token $token",
     };
-    Uri uri = Uri.parse("https://api-balanced.azurewebsites.net/api/profile-pic/");
+    Uri uri = Uri.parse("https://api-balanced-epic.azurewebsites.net/api/profile-pic/");
     var request = http.MultipartRequest('POST', uri);
     request.headers.addAll(headers);
     request.files.add(await http.MultipartFile.fromPath('profile',path));
    final response = await request.send();
    print(response.statusCode);
-  }
-  submitForm(String name, String email, String linkedinUrl, String education, String additionalInfo)async{
-    String token = await getToken(key: "token1");
-    var data = {
-      'name':name,
-      'email':email,
-      'education_details':education,
-      'linkdein_url':linkedinUrl,
-      'add_info':additionalInfo
-    };
-    Uri uri = Uri.parse("https://ashish226.pythonanywhere.com/api/user-form/");
-    var request = await http.post(uri,body:data);
-    print(request.body);
-    print(request.statusCode);
   }
  submitLesson()async{
    String token = await getToken(key: "token1");
@@ -148,7 +134,7 @@ class PostServices {
      "Content-Type":"application/json",
      "Authorization":"Bearer $token"
    };
-   Uri uri = Uri.parse("https://api-balanced.azurewebsites.net/api/lesson/1");
+   Uri uri = Uri.parse("https://api-balanced-epic.azurewebsites.net/api/lesson/1");
    var request = await http.put(uri,headers: head);
    Fluttertoast.showToast(msg: request.body);
  }

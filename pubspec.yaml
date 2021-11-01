@@ -29,6 +29,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   http: ^0.13.3
+  flutter_launcher_icons:
   google_fonts: ^2.1.0
   responsive_builder: ^0.4.1
   fluttertoast: ^8.0.7
@@ -37,15 +38,23 @@ dependencies:
   date_time_picker:
   fl_chart:
   story: ^0.6.0
+  video_player:
   twilio_flutter:
   speech_to_text:
   flutter_tts:
   flutter_animation_progress_bar: ^2.0.1
+  notion_api: ^1.2.0
+  flutter_svg:
+  draggable_bottom_sheet:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/balanced.png"
 
-# For information on the generic Dart part of this file, see the
+# For information on the genbalanceric Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.

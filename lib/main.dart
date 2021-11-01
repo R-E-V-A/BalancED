@@ -7,6 +7,7 @@ import 'package:resolvers/Screens/MyProfile/MyProfileScreen.dart';
 import 'package:resolvers/Screens/Onboarding/Onboarding2.dart';
 import 'package:resolvers/Screens/Onboarding/Onboarding3.dart';
 import 'package:resolvers/Screens/Onboarding/Onboarding4.dart';
+import 'package:resolvers/Screens/SplashScreen.dart';
 import 'package:resolvers/Screens/WandPages/BudgetScore.dart';
 import 'Routes.dart';
 import 'Screens/AuthScreens/SignUpScreen.dart';
@@ -14,37 +15,14 @@ import 'Screens/Onboarding/Onboarding1.dart';
 import 'Services/SharedPreferences.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
-}
-
-class MyApp extends StatefulWidget {
-  // This widget is the root of your application.
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  String token="empty";
-  getTok()async
-  {
-    token = await getToken(key:"token1");
-  }
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getTok();
-  }
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: token=="empty"?SignUpPage():HomePage(),/*SignUpPage(title: 'Flutter Demo Home Page'),*/
-      routes: routes,
-      initialRoute: token=="empty"?"/SignUpPage":"/HomePage",
-    );
-  }
+  var token = await getToken(key: "token1");
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: token == null ? SplashScreen() : HomePage(),
+    /*SignUpPage(title: 'Flutter Demo Home Page'),*/
+    routes: routes,
+    initialRoute: token == null ? "/SplashScreen" : "/HomePage",
+  ));
 }
 
 var routes = <String,WidgetBuilder>{
@@ -59,4 +37,5 @@ var routes = <String,WidgetBuilder>{
   Routes.aboutPage: (BuildContext context)=>AboutPage(),
   Routes.budgetScorePage:(BuildContext context)=>BudgetScore(),
   Routes.budgetHomePage:(BuildContext context)=>BudgetHome(),
+  Routes.splashPage: (BuildContext context)=>SplashScreen()
 };

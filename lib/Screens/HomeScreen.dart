@@ -11,6 +11,7 @@ import 'package:resolvers/Routes.dart';
 import 'package:resolvers/Screens/BudgetDiary/AddRecord.dart';
 import 'package:resolvers/Screens/SingleCourse/PreCourse.dart';
 import 'package:resolvers/Screens/StoryScreens/StoryPage.dart';
+import 'package:resolvers/Services/FlutterTextToSpeech.dart';
 import 'package:resolvers/Services/GetServices.dart';
 import 'package:resolvers/Services/PostServices.dart';
 
@@ -95,16 +96,21 @@ class _HomePageState extends State<HomePage> {
                                   GestureDetector(
                                     child: Container(
                                       width: 0.2*width,
+                                      height: 0.1*height,
                                       decoration: BoxDecoration(
                                           border: Border.all(color: Color(0xff22319e),width: 0.004*width),
                                           borderRadius: BorderRadius.circular(20),
-                                        image: DecorationImage(
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Image(
                                           fit: BoxFit.contain,
                                           image: AssetImage("assets/cnn.png",),
-                                        )
+                                        ),
                                       ),
                                     ),
-                                    onTap: (){
+                                    onTap: ()async{
+                                      await TextToSpeech().getData();
                                         Navigator.push(context, MaterialPageRoute(builder: (context)=>StoryPage(
                                           news: snapshot.data[index],
                                           idx: index,
@@ -238,10 +244,10 @@ class _HomePageState extends State<HomePage> {
                 if (val == 0) {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       '/HomePage', (Route<dynamic> route) => false);
-                } else if (val == 1) {
+                } /*else if (val == 1) {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       '/BudgetHomePage', (Route<dynamic> route) => false);
-                } else if (val == 2) {
+                } */else if (val == 1) {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       '/MyProfilePage', (Route<dynamic> route) => false);
                 }
@@ -254,9 +260,9 @@ class _HomePageState extends State<HomePage> {
               label: "Home",
               icon: Icon(Icons.home),
             ),
-            BottomNavigationBarItem(
+         /*   BottomNavigationBarItem(
                 label: "Budget",
-                icon: Icon(Icons.account_balance_wallet_outlined)),
+                icon: Icon(Icons.account_balance_wallet_outlined)),*/
             BottomNavigationBarItem(label: "Profile", icon: Icon(Icons.person)),
           ],
         ));

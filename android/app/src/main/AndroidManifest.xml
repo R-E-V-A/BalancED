@@ -8,8 +8,8 @@
         </intent>
     </queries>
    <application
-        android:label="calhacks"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Balanced"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

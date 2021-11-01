@@ -11,6 +11,11 @@ class TwilioService
 
   }
   void sendSms()async{
-    await twilioFlutter.sendSMS(toNumber: "919840954938", messageBody: "Hey There Anush,expense added successfully");
+    await twilioFlutter.sendSMS(toNumber: "919967762521", messageBody: "Hey There Ayush,expense added successfully");
   }
+  void sendSms2()async
+  {
+    await twilioFlutter.sendSMS(toNumber: "919967762521", messageBody: "Hooray! Course Completed Successfully");
+  }
+
 }

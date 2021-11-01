@@ -199,8 +199,9 @@ class _AddRecordState extends State<AddRecord> {
                       onTap: ()async{
                         Fluttertoast.showToast(msg: "Hang On");
                         int amt = int.parse(amount.text);
-                       await postServices.addTransaction(date.text, amt, category.text, " ", "Income");
+                       await postServices.addTransaction(date.text, amt, title.text, " ", "Income");
                        await twilioService.setAccount();
+                       await twilioService.sendSms();
                         Navigator.pushNamed(context, Routes.budgetHomePage);
                       },
                       child:Container(

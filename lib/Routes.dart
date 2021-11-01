@@ -18,4 +18,5 @@ class Routes
   static const String analyticsPage = "/analyticsPage";
   static const String budgetScorePage = "/BudgetScorePage";
   static const String budgetHomePage = "/BudgetHomePage";
+  static const String splashPage = "/SplashScreen";
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:resolvers/Constants/Fonts&Themes.dart';
 import 'package:resolvers/Services/PostServices.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -26,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        color: Color(0xffF0F0F0),
+        color: Colors.white,
         child: Padding(
           padding: EdgeInsets.only(top: 0.08*height,left: 0.1*width,right: 0.1*width),
           child: Form(
@@ -35,11 +36,11 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 80.0),
+                  padding: const EdgeInsets.only(left: 60.0,right: 60),
                   child: Image(
-                    height: 130,
+                    height: 80,
                     image: AssetImage(
-                        "assets/callogo.png"
+                        "assets/image 7.png"
                     ),
                   ),
                 ),
@@ -57,16 +58,65 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 0.02*height,),
                 Text("Password",style: paraText.copyWith(fontWeight: FontWeight.w600,fontSize: 16,color: Color(0xff49494f)),),
                 SizedBox(height: 0.01*height,),
-                SignUpTextFieldMobile(width: width,height: height,controller: password,title: "Shhh",),
+                Container(
+            // height: 10,
+            height: height*0.055,
+            width: 0.8*width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Color(0xffD2D8CF)),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0,bottom: 3),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      obscureText: isVisible,
+                      controller: password,
+                      keyboardType: TextInputType.name,
+                      decoration: InputDecoration(
+                        errorBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusColor: Colors.white,
+                        fillColor: Colors.white,
+                        hoverColor: Colors.white,
+                        hintText: "Password",
+                        hintStyle: TextStyle(color: Color(0xff979797),fontSize: 14),
+                        border: InputBorder.none,
+                      ),
+                      validator: (text) {
+                        if (text == null || text.isEmpty) {
+                          return 'Password is empty';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  IconButton(onPressed: (){
+                    setState(() {
+                     isVisible = isVisible?false:true;
+                    });
+                  }, icon: Icon(!isVisible?Icons.lock_open_sharp:Icons.lock))
+                ],
+              ),
+            ),
+          ),
+               // SignUpTextFieldMobile(width: width,height: height,controller: password,title: "Shhh",privacy: 1,),
                 SizedBox(height: 0.17*height,),
                 GestureDetector(
                   onTap: ()async{
                     if(formKey.currentState.validate())
                       {
                         formKey.currentState.save();
-                        await postServices.LogInUser(username.text, password.text);
-                        Navigator.of(context)
-                            .pushNamedAndRemoveUntil('/HomePage', (Route<dynamic> route) => false);
+                        var x = await postServices.LogInUser(username.text, password.text);
+
+                        if(x!=null) {
+                          Navigator.of(context)
+                              .pushNamedAndRemoveUntil('/HomePage', (Route<
+                              dynamic> route) => false);
+                        }
                       }
                   },
                   child: Container(
